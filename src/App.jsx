@@ -1,12 +1,10 @@
 import React from 'react'
-import {Text, View} from 'react-native'
+import RssListScreen from './screens/RssListScreen'
 
 export function App() {
-  return (
-    <View>
-      <Text>Hello, world!</Text>
-    </View>
-  )
+  // return <SplashScreen />
+  // return <FeedsScreen />
+  return <RssListScreen />
 }
 
 export default App
