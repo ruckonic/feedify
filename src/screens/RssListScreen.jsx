@@ -1,5 +1,5 @@
 import React from 'react'
-import {SafeAreaView, Animated, WebView, StyleSheet, View} from 'react-native'
+import {SafeAreaView, Animated, StyleSheet, View} from 'react-native'
 
 import Header from '../components/Header'
 import {RssList} from '../components/rss/RssList'
