@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {
   Platform,
   StatusBar,
@@ -7,9 +7,13 @@ import {
   View,
   SafeAreaView,
   Animated,
+  TouchableOpacity,
 } from 'react-native'
+import {HeaderAnimationContext} from '../providers/header-animation'
 
-export function Header({animateValue, showLogo = true}) {
+export function Header({navigation, route}) {
+  const animateValue = useContext(HeaderAnimationContext)
+
   const headerImageContainerPadding =
     animateValue?.interpolate({
       inputRange: [0, styles.headerImageContainer.paddingBottom],
@@ -24,33 +28,48 @@ export function Header({animateValue, showLogo = true}) {
       extrapolate: 'clamp',
     }) ?? styles.headerImage.width
 
-  console.log('headerWidth', headerWidth)
-
   return (
     <SafeAreaView style={styles.headerContainer}>
       <StatusBar barStyle="light-content" backgroundColor="#1F4690" />
-      {showLogo && (
-        <Animated.View
-          style={[
-            styles.headerImageContainer,
-            {paddingBottom: headerImageContainerPadding},
-          ]}>
-          <Animated.Image
-            style={[styles.headerImage, {width: headerWidth}]}
-            source={require('../assets/images/feedify-large-logo.png')}
-          />
-        </Animated.View>
-      )}
-      <View style={styles.headerButtonContainer}>
-        <View style={[styles.headerButton]}>
-          <Text style={[styles.textBold]}>Contenido</Text>
-        </View>
 
-        <View style={[styles.headerButton, styles.buttonActive]}>
-          <Text style={[styles.textBold, styles.textWhite]}>Listado</Text>
-        </View>
+      <Animated.View
+        style={[
+          styles.headerImageContainer,
+          {paddingBottom: headerImageContainerPadding},
+        ]}>
+        <Animated.Image
+          style={[styles.headerImage, {width: headerWidth}]}
+          source={require('../assets/images/feedify-large-logo.png')}
+        />
+      </Animated.View>
+
+      <View style={styles.headerButtonContainer}>
+        <HeaderButton
+          title="Contenido"
+          active={route.name === 'Feeds'}
+          onPress={() => navigation.navigate('Feeds')}
+        />
+        <HeaderButton
+          title="Listado"
+          active={route.name === 'RssList'}
+          onPress={() => navigation.navigate('RssList')}
+        />
       </View>
     </SafeAreaView>
+  )
+}
+
+function HeaderButton({title, onPress = () => {}, active = false}) {
+  return (
+    <View style={styles.buttonWrapper}>
+      <TouchableOpacity onPress={onPress} activeOpacity={active}>
+        <View style={[styles.headerButton, active && styles.buttonActive]}>
+          <Text style={[styles.textBold, active && styles.textWhite]}>
+            {title}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </View>
   )
 }
 
@@ -72,8 +91,10 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 10,
   },
-  headerButton: {
+  buttonWrapper: {
     flex: 1,
+  },
+  headerButton: {
     height: 38,
     justifyContent: 'center',
     alignItems: 'center',

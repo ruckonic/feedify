@@ -1,14 +1,23 @@
 import React from 'react'
 import {Dimensions, StyleSheet, Text, View} from 'react-native'
+
 import Button from './Button'
+import {useNavigation} from '@react-navigation/native'
 
 export function ListEmpty({showButton = true}) {
+  const navigation = useNavigation()
+
   return (
     <View style={styles.wrapper}>
       <Text style={styles.text}>
         Ups, aún no has {'\n'}agregado ningún link
       </Text>
-      {showButton && <Button title="+ Agregar contenido" />}
+      {showButton && (
+        <Button
+          title="+ Agregar contenido"
+          onPress={() => navigation.push('AddRssLink')}
+        />
+      )}
     </View>
   )
 }

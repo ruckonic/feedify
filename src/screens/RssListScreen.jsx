@@ -1,16 +1,14 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {SafeAreaView, Animated, StyleSheet, View} from 'react-native'
 
-import Header from '../components/Header'
 import {RssList} from '../components/rss/RssList'
 import Button from '../components/Button'
+import {HeaderAnimationContext} from '../providers/header-animation'
 
-export function RssListScreen() {
-  const animate = React.useRef(new Animated.Value(0)).current
-
+export function RssListScreen({navigation}) {
+  const animate = useContext(HeaderAnimationContext)
   return (
     <>
-      <Header animateValue={animate} />
       <RssList
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {y: animate}}}],
@@ -22,6 +20,7 @@ export function RssListScreen() {
           title="+ Agregar nuevo link"
           style={styles.button}
           textStyles={styles.buttonTitle}
+          onPress={() => navigation.push('AddRssLink')}
         />
       </View>
       <SafeAreaView />

@@ -1,10 +1,19 @@
 import React from 'react'
-import RssListScreen from './screens/RssListScreen'
+import {NavigationContainer} from '@react-navigation/native'
+import {RootStack} from './navigation'
+import {HeaderAnimationProvider} from './providers/header-animation'
+import {SafeAreaProvider} from 'react-native-safe-area-context'
 
 export function App() {
-  // return <SplashScreen />
-  // return <FeedsScreen />
-  return <RssListScreen />
+  return (
+    <SafeAreaProvider>
+      <HeaderAnimationProvider>
+        <NavigationContainer>
+          <RootStack />
+        </NavigationContainer>
+      </HeaderAnimationProvider>
+    </SafeAreaProvider>
+  )
 }
 
 export default App

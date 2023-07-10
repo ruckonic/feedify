@@ -1,9 +1,9 @@
 import React from 'react'
-import {StyleSheet, Text, View, Image, TouchableHighlight} from 'react-native'
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native'
 
 export function FeedItem({title, image, publishedAt, author}) {
   return (
-    <TouchableHighlight
+    <TouchableOpacity
       onPress={() => {
         console.log('Pressed')
       }}>
@@ -14,7 +14,7 @@ export function FeedItem({title, image, publishedAt, author}) {
         </View>
         <Image style={styles.feedItemImage} source={{uri: image}} />
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   )
 }
 
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'white',
     gap: 16,
     marginVertical: 8,
   },
@@ -35,11 +34,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 4,
     fontFamily: 'Inter',
+    color: '#000',
   },
   feedItemAuthor: {
     fontFamily: 'Inter',
     fontSize: 12,
-
     color: 'gray',
   },
   feedItemImage: {

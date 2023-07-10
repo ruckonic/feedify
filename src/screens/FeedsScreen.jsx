@@ -1,14 +1,14 @@
-import React from 'react'
-import Header from '../components/Header'
+import React, {useContext} from 'react'
+import {SafeAreaView, Animated, View} from 'react-native'
+import {useHeaderHeight} from '@react-navigation/elements'
 import {FeedsList} from '../components/feeds/FeedsList'
-import {SafeAreaView, Animated} from 'react-native'
+import {HeaderAnimationContext} from '../providers/header-animation'
 
 export function FeedsScreen() {
-  const animate = React.useRef(new Animated.Value(0)).current
+  const animate = useContext(HeaderAnimationContext)
 
   return (
     <>
-      <Header animateValue={animate} />
       <FeedsList
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {y: animate}}}],

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {
   StyleSheet,
   View,
@@ -8,7 +8,13 @@ import {
   SafeAreaView,
 } from 'react-native'
 
-export function SplashScreen() {
+export function SplashScreen({navigation}) {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('Feeds')
+    }, 1000)
+  }, [navigation])
+
   return (
     <View style={styles.wrapper}>
       <SafeAreaView />
@@ -30,7 +36,6 @@ export function SplashScreen() {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },

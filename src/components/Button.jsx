@@ -4,17 +4,11 @@ import {Pressable, StyleSheet, Text, Animated} from 'react-native'
 export function Button({
   title,
   onPress = () => {},
-  LeftIcon,
-  RightIcon,
   pressableProps,
   textStyles,
   style,
 }) {
-  const _LeftIcon = LeftIcon ?? null
-  const _RightIcon = RightIcon ?? null
-  const _title = title ?? null
-
-  if (!_LeftIcon && !_RightIcon && !_title) {
+  if (!title) {
     throw new Error(
       'You must provide at least one of the following props: title, LeftIcon, RightIcon',
     )
@@ -28,13 +22,9 @@ export function Button({
             style,
             pressed ? styles.pressed : styles.unpressed,
           ])}>
-          {_LeftIcon}
-          {_title && (
-            <Text style={StyleSheet.compose(styles.text, textStyles)}>
-              {_title}
-            </Text>
-          )}
-          {_RightIcon}
+          <Text style={StyleSheet.compose(styles.text, textStyles)}>
+            {title}
+          </Text>
         </Animated.View>
       )}
     </Pressable>
@@ -48,12 +38,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderRadius: 8,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#E9EDF4',
   },
   text: {
     fontSize: 16,
-    color: 'black',
-    fontFamily: 'Inter Semibold',
+    color: '#374151',
+    fontFamily: 'Inter',
   },
   unpressed: {},
   pressed: {
