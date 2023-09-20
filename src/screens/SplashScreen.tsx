@@ -7,8 +7,19 @@ import {
   Text,
   SafeAreaView,
 } from 'react-native'
+import type {RootStackScreenProps} from '../navigation/navigation.type'
 
-export function SplashScreen({navigation}) {
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList {
+      SplashScreen: undefined
+    }
+  }
+}
+
+export function SplashScreen({
+  navigation,
+}: RootStackScreenProps<'SplashScreen'>) {
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate('Feeds')

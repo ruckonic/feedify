@@ -1,10 +1,19 @@
 import React, {useContext} from 'react'
-import {SafeAreaView, Animated, View} from 'react-native'
-import {useHeaderHeight} from '@react-navigation/elements'
+import {SafeAreaView, Animated} from 'react-native'
+
 import {FeedsList} from '../components/feeds/FeedsList'
 import {HeaderAnimationContext} from '../providers/header-animation'
+import {RootStackScreenProps} from '../navigation/navigation.type'
 
-export function FeedsScreen() {
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList {
+      Feeds: undefined
+    }
+  }
+}
+
+export function FeedsScreen({}: RootStackScreenProps<'Feeds'>) {
   const animate = useContext(HeaderAnimationContext)
 
   return (

@@ -13,8 +13,19 @@ import FormGroup from '../components/FormGroup'
 import Label from '../components/Label'
 import TextInput from '../components/TextInput'
 import Button from '../components/Button'
+import type {RootStackScreenProps} from '../navigation/navigation.type'
 
-export function AddRssLinkScreen({navigation}) {
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList {
+      AddRssLink: undefined
+    }
+  }
+}
+
+export function AddRssLinkScreen({
+  navigation,
+}: RootStackScreenProps<'AddRssLink'>) {
   const headerHeight = useHeaderHeight()
 
   useLayoutEffect(() => {

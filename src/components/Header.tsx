@@ -10,8 +10,9 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import {HeaderAnimationContext} from '../providers/header-animation'
+import {RootStackScreenProps} from '../navigation/navigation.type'
 
-export function Header({navigation, route}) {
+export function Header({navigation, route}: RootStackScreenProps) {
   const animateValue = useContext(HeaderAnimationContext)
 
   const headerImageContainerPadding =
@@ -59,10 +60,20 @@ export function Header({navigation, route}) {
   )
 }
 
-function HeaderButton({title, onPress = () => {}, active = false}) {
+interface HeaderButtonProps {
+  title: string
+  onPress?: () => void
+  active?: boolean
+}
+
+function HeaderButton({
+  title,
+  onPress = () => {},
+  active = false,
+}: HeaderButtonProps) {
   return (
     <View style={styles.buttonWrapper}>
-      <TouchableOpacity onPress={onPress} activeOpacity={active}>
+      <TouchableOpacity onPress={onPress}>
         <View style={[styles.headerButton, active && styles.buttonActive]}>
           <Text style={[styles.textBold, active && styles.textWhite]}>
             {title}

@@ -1,13 +1,21 @@
 import React from 'react'
 import {Pressable, StyleSheet, Text, Animated} from 'react-native'
 
+interface ButtonProps {
+  title?: string
+  onPress?: () => void
+  pressableProps?: React.ComponentProps<typeof Pressable>
+  textStyles?: React.ComponentProps<typeof Text>['style']
+  style?: React.ComponentProps<typeof Animated.View>['style']
+}
+
 export function Button({
   title,
   onPress = () => {},
   pressableProps,
   textStyles,
   style,
-}) {
+}: ButtonProps) {
   if (!title) {
     throw new Error(
       'You must provide at least one of the following props: title, LeftIcon, RightIcon',

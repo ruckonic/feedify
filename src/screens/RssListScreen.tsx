@@ -4,8 +4,17 @@ import {SafeAreaView, Animated, StyleSheet, View} from 'react-native'
 import {RssList} from '../components/rss/RssList'
 import Button from '../components/Button'
 import {HeaderAnimationContext} from '../providers/header-animation'
+import {RootStackScreenProps} from '../navigation/navigation.type'
 
-export function RssListScreen({navigation}) {
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList {
+      RssList: undefined
+    }
+  }
+}
+
+export function RssListScreen({navigation}: RootStackScreenProps<'RssList'>) {
   const animate = useContext(HeaderAnimationContext)
   return (
     <>

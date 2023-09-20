@@ -1,7 +1,12 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native'
 
-export function RssItem({title, link}) {
+interface RssItemProps {
+  title: string
+  link: string
+}
+
+export function RssItem({title, link}: RssItemProps) {
   return (
     <TouchableHighlight
       underlayColor="#eee"

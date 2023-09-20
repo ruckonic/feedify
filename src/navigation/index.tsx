@@ -5,8 +5,9 @@ import RssListScreen from '../screens/RssListScreen'
 import FeedsScreen from '../screens/FeedsScreen'
 import Header from '../components/Header'
 import AddRssLinkScreen from '../screens/AddRssLinkScreen'
+import type {RootStackParamList} from './navigation.type'
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export function RootStack() {
   return (

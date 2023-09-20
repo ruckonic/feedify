@@ -1,11 +1,12 @@
 import React from 'react'
 import {Dimensions, StyleSheet, Text, View} from 'react-native'
-
-import Button from './Button'
 import {useNavigation} from '@react-navigation/native'
 
+import Button from './Button'
+import {RootStackNavigationProp} from '../navigation/navigation.type'
+
 export function ListEmpty({showButton = true}) {
-  const navigation = useNavigation()
+  const navigation = useNavigation<RootStackNavigationProp>()
 
   return (
     <View style={styles.wrapper}>
