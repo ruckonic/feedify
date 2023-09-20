@@ -3,7 +3,9 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  StatusBar,
   StyleSheet,
+  TextInput as RCTextInput,
   View,
 } from 'react-native'
 import {useHeaderHeight} from '@react-navigation/elements'
@@ -27,6 +29,7 @@ export function AddRssLinkScreen({
   navigation,
 }: RootStackScreenProps<'AddRssLink'>) {
   const headerHeight = useHeaderHeight()
+  const nameTextFieldRef = React.useRef<RCTextInput>(null)
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -42,16 +45,23 @@ export function AddRssLinkScreen({
       ]}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       onTouchStart={Keyboard.dismiss}>
+      <StatusBar barStyle="dark-content" backgroundColor="white" />
       <SafeAreaView />
       <View style={styles.formContainer}>
         <FormGroup>
           <Label>Ingresar URL</Label>
-          <TextInput keyboardType="url" dataDetectorTypes="link" />
+          <TextInput
+            keyboardType="url"
+            dataDetectorTypes="link"
+            returnKeyType="next"
+            onSubmitEditing={() => nameTextFieldRef.current?.focus()}
+            autoFocus
+          />
         </FormGroup>
 
         <FormGroup>
           <Label>Nombre (opcional)</Label>
-          <TextInput />
+          <TextInput focusable ref={nameTextFieldRef} />
         </FormGroup>
       </View>
       <SafeAreaView style={styles.buttonContainer} edges={['bottom']}>
